@@ -1,0 +1,47 @@
+import math
+def answer(n):
+  # your code here
+  num = int(n)
+  count = 0
+  while(num!=1):
+    while((num%2)==0):
+      count+=1
+      num/=2
+      print(num)
+    if(num<4):
+      count+=num-1
+      break
+    if(math.log(num+1,2)%1==0):
+      count+=1
+      num+=1
+      print(num)
+    elif(math.log(num-1,2)%1==0):
+      count+=1
+      num-=1
+      print(num)
+    #decide
+    else:
+      up_count =0
+      down_count = 0
+      temp = num+1
+      while(temp%2==0):
+        temp/=2
+        up_count+=1
+      temp = num-1
+      while(temp%2==0):
+        temp/=2
+        down_count+=1
+      count+=1
+      if(up_count>down_count):
+        count+=up_count
+        num+=1
+        num/=2**up_count
+        print(num)
+      else:
+        count+=down_count
+        num-=1
+        num/=2**down_count
+        print(num)
+  return count
+
+print(answer(55))
